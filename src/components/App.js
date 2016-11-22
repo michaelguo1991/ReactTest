@@ -10,19 +10,19 @@ class App extends Component {
                 <div className="content">
                     <div className="add-container">
                         <input type="checkbox" className="toggle-all" />
-                        <input type="text" placeholder="涓嬩竴姝ヨ鍋氫粈涔堬紵"
+                        <input type="text" placeholder="下一步要做什么？"
                             className="editText" />
                     </div>
                     
                     <ul className="items">
                         <li className="item completed">
                             <input id="1" className="toggle" type="checkbox" />
-                            <label htmlFor="1" className="text">鍚冮キ鐫¤</label>
+                            <label htmlFor="1" className="text">吃饭睡觉</label>
                             <button className="close-btn"></button>
                         </li>
                         <li className="item">
                             <input id="2" className="toggle" type="checkbox" />
-                            <label htmlFor="2" className="text">鍚冮キ鐫¤</label>
+                            <label htmlFor="2" className="text">吃饭睡觉</label>
                         </li>
                     </ul>
 
