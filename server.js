@@ -1,24 +1,26 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const config = require('./webpack.config.js');
 
-new WebpackDevServer(webpack(config), {
-    publicPath: config.output.publicPath,
-    hot: true,
-    historyApiFallback: true,
-    quiet: false,
-    noInfo: false,
-    stats: {
-        assets: false,
-        colors: true,
-        version: false,
-        hash: false,
-        timings: false,
-        chunks: false,
-        chunkModules: false
-    }
-}).listen(3000, 'localhost', function(err) {
-    err && console.log(err);
+const serverPort = '3000';
 
-    console.log('Listening at localhost:3000');
-})
+const compiler = webpack(config);
+
+const server = new WebpackDevServer(compiler, {
+  // Set this as true if you want to access dev server from arbitrary url.
+  // This is handy if you are using a html5 router.
+  historyApiFallback: true,
+  hot: true,
+  inline: true,
+  progress: true,
+  publicPath: '/build',
+  contentBase: '/app',
+  stats: { colors: true }
+});
+
+config.entry.unshift(`webpack-dev-server/client?http://localhost:${serverPort}/`);
+
+server.listen(serverPort, 'localhost', (err) => {
+  err && console.log(err);
+  console.log(`Listening at localhost:${serverPort}`);
+});

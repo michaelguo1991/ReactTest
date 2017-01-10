@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb", #使用airbnb标准检测
+  "env": {
+    "browser": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }], #在js、jsx中都允许jsx语法
+    #"arrow-body-style": [0] #是否开启对()=>() function的检查
+    "import/no-extraneous-dependencies": [0],
+    "comma-dangle": [0],
+    "no-unused-expressions": [2, { "allowShortCircuit": true, "allowTernary": true }],
+    "no-console": [0]
+  }
+}
