@@ -9,16 +9,16 @@ const compiler = webpack(config);
 const server = new WebpackDevServer(compiler, {
   // Set this as true if you want to access dev server from arbitrary url.
   // This is handy if you are using a html5 router.
-  historyApiFallback: true,
-  hot: true,
+  historyApiFallback: false,
   inline: true,
+  hot: true,
   progress: true,
+  quiet: false,
+  noInfo: false,
   publicPath: '/build',
   contentBase: '/app',
   stats: { colors: true }
 });
-
-config.entry.unshift(`webpack-dev-server/client?http://localhost:${serverPort}/`);
 
 server.listen(serverPort, 'localhost', (err) => {
   err && console.log(err);

@@ -9,6 +9,8 @@ const NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules');
 
 module.exports = {
   entry: [
+    'webpack-dev-server/client?http://0.0.0.0:3000',
+    'webpack/hot/only-dev-server',
     path.resolve(APP_PATH, 'index.js')
   ],
   output: {
