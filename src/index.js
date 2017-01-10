@@ -1,9 +1,9 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import Entry from './components/Entry';
-import Game from './components/Game';
+// import Game from './components/Game';
 
 render(
-    <Entry />,
-    document.getElementById('root')
+  <Entry />,
+  document.getElementById('root')
 );

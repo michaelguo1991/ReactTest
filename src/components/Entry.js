@@ -1,23 +1,18 @@
-import React, {Component} from 'react';
-import {render} from 'react-dom';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import appReducers from '../reducers';
 import TodoApp from './TodoApp';
 
-let store = createStore(appReducers);
+const store = createStore(appReducers);
 store.subscribe(() => {
-    console.log(store.getState());
-})
+  console.log(store.getState());
+});
 
-class Entry extends Component {
-    render() {
-        return (
-            <Provider store={store}>
-                <TodoApp />
-            </Provider>
-        );
-    }
-}
+const Entry = () => (
+  <Provider store={store}>
+    <TodoApp />
+  </Provider>
+);
 
-export default Entry
+export default Entry;
