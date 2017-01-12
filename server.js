@@ -1,3 +1,7 @@
+/**
+ * 此文件废弃，采用在package.json中动态配置--config的方式
+ */
+
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config.js');
