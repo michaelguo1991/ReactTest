@@ -1,11 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const stylelint = require('stylelint');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const SRC_PATH = path.resolve(__dirname, 'src'); //绝对路径
-const BUILD_PATH = path.resolve(__dirname, 'build'); //绝对路径
-const NODE_MODULES_PATH = path.resolve(__dirname, 'node_modules'); //绝对路径
+const SRC_PATH = path.resolve(__dirname, 'src'); // 绝对路径
+const BUILD_PATH = path.resolve(__dirname, 'build'); // 绝对路径
+const NODE_MODULES_PATH = path.resolve(__dirname, 'node_modules'); // 绝对路径
 
 module.exports = {
   entry: [
@@ -27,22 +29,27 @@ module.exports = {
       test: /\.jsx?$/,
       exclude: [NODE_MODULES_PATH],
       loaders: ['react-hot', 'babel-loader']
-    }, {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style', 'css!sass')
-    }, {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css')
-    }, {
-      test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-      loader: 'url-loader?limit=8192' //小于8K内嵌；大于8K生成文件
-    }]
+    },
+    /* eslint-disable */
+    { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!postcss!sass') },
+    { test: /\.css$/,  loader: ExtractTextPlugin.extract('style', 'css!postcss')},
+
+    { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
+    { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
+    { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
+    { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
+    { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
+    { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
+    { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }] // 小于8K base64内嵌
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.tpl.html',
       inject: 'body',
-      filename: 'index.html'
+      filename: 'index.html',
+      minify: {
+        collapseWhitespace : true
+      }
     }),
     new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin('index.css'),
@@ -50,5 +57,6 @@ module.exports = {
   ],
   resolve: {
     extensions: ['', '.js', '.jsx']
-  }
+  },
+  postcss: [autoprefixer, stylelint]
 };

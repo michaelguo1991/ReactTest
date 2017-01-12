@@ -1,3 +1,4 @@
+//注释
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
@@ -47,4 +48,8 @@ ol, ul {
 
 .game-info {
   margin-left: 20px;
+}
+
+.prefix-test {
+  transition: 1s all ease-in;
 }
